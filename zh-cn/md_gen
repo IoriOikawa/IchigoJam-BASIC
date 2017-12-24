@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+# -*- coding:utf-8 -*-
+
+import html
+import os
+import re
+
+subtitle = re.compile("\[[\s]+(.*)[\s]+\]")
+all_dash = re.compile("^[-]*$")
+
+with open("README.md", "w") as readme:
+    readme.write("PaperNeko Project - Ichigojam\n")
+    readme.write("--------------------------\n")
+    for dirpath, dirnames, filenames in os.walk('.'):
+        for filename in filenames:
+            if filename[-4:] == ".txt":
+                readme.write("\n### ")
+                readme.write(filename[:-4])
+                readme.write("\n")
+                with open(filename) as f:
+                    f.readline()
+                    availability = f.readline()
+                    if len(availability) == 0:
+                        availability = "all"
+                    readme.write("#### availability\n")
+                    readme.write(availability)
+                    readme.write("\n")
+                    line = f.readline().strip()
+                    while not all_dash.match(line):
+                        line = f.readline().strip()
+                    sub = ""
+                    for line in f:
+                        line = line.strip()
+                        if len(line) == 0 or all_dash.match(line):
+                            continue
+                        matches = subtitle.match(line)
+                        if matches:
+                            if sub == "例":
+                                readme.write("```\n\n")
+                            readme.write("#### ")
+                            sub = matches.group(1)
+                            readme.write(sub)
+                            readme.write("\n")
+                            if sub == "例":
+                                readme.write("```ichigojam\n")
+                        else:
+                            if sub == "例":
+                                readme.write(line)
+                                readme.write("\n")
+                            else:
+                                readme.write(html.escape(line))
+                                readme.write("\n\n")
