@@ -1,0 +1,43 @@
+HELP
+1.0.1～
+IchigoJam PC
+-----------------------------------------------------------
+[ 功能 ]
+显示内存映射。
+
+[ 使用方式 ]
+HELP
+
+[ 例 ]
+HELP
+
+[ 解説 ]
+在 1.0.1～1.1beta5 版本中，输出如下形式的内容。
+
+MEMORY MAP
+#000-#6FF CHAR PATTERN(ROM)
+#700-#7FF CHAR PATTERN(RAM)
+#800-#8FF VARS
+#900-#BFF VRAM
+#C00-#FFF PROGRAM
+
+在 1.1 beta6～7 版本中临时被废止。
+
+在 1.1 beta8～15 版本中，输出如下形式的内容。
+
+MEM MAP
+#000 CHAR
+#700 PCG
+#800 VAR
+#900 VRAM
+#C00 PROGRAM
+#1002 KEY
+
+在 1.1 beta16 以上版本 和 1.1.1 版本中，输出如下形式的内容。
+
+MEM MAP
+#000 CHAR
+#700 PCG
+#800 VAR
+#900 VRAM
+#C00 PROGRAM
